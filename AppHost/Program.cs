@@ -1,4 +1,4 @@
-var builder = DistributedApplication.CreateBuilder(args);
+﻿var builder = DistributedApplication.CreateBuilder(args);
 
 // Backing Services
 
@@ -14,7 +14,8 @@ var catalogDb = postgres.AddDatabase("catalogdb");  // Create a new database wit
 
 // Projects
 
-// Add the 'catalog' project, reference the 'catalogdb' database, and ensure it waits for the database to be ready
+// Catalog projesini environment variableslarda ConnectionString olarak inject ettiğimiz kısım. ( with reference )
+
 var catalog = builder
     .AddProject<Projects.Catalog>("catalog")  // Add a project named 'catalog'
     .WithReference(catalogDb)                 // Reference the 'catalogdb' database in the project

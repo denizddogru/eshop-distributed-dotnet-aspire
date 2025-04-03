@@ -20,13 +20,14 @@ This project provides common .NET Aspire services such as service discovery, res
 
 - .NET 9
 - Visual Studio 2022
-- PostgreSQL
+- Docker Desktop 
 
 ### Technologies Used
 
 - .NET 9
-- PostgreSQL
+- PostgreSQL ( Using migrations and EF Core )
 - RabbitMQ
+- Docker Desktop ( You need Docker Desktop started before running the application )
 
 ### Installation
 
@@ -38,9 +39,8 @@ This project provides common .NET Aspire services such as service discovery, res
 
 ### Running the Application
 
-1. Apply migrations and run the application:
-2. The API will be available at `https://localhost:5001`.
-
+1. Select AppHost as your startup project, then run the application.
+2. As for migrations they are automatically applied on startup, so you don't need to run them manually.
 
 ### Dependencies
 

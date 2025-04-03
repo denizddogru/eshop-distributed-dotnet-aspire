@@ -2,7 +2,7 @@
 
 public static class ProductEndpoints
 {
-    public static void MapProductEndpotins(this IEndpointRouteBuilder app)
+    public static void MapProductEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/products");
 

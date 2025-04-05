@@ -29,13 +29,6 @@ This project provides common .NET Aspire services such as service discovery, res
 - RabbitMQ
 - Docker Desktop ( You need Docker Desktop started before running the application )
 
-### Installation
-
-1. Clone the repository:
-2. Set up the PostgreSQL database and update the connection string in `appsettings.json`:
-3. Restore the dependencies and build the project:
-4. Add a reference to the `Aspire.ServiceDefaults` project in your service project.
-5. Configure your service to use the default services provided by this project.
 
 ### Running the Application
 

@@ -3,7 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.AddServiceDefaults();
-builder.AddRedisDistributedCache("cache");
+builder.AddRedisDistributedCache(connectionName: "cache");
 builder.Services.AddScoped<BasketService>();
 
 var app = builder.Build();
@@ -15,5 +15,7 @@ app.MapBasketEndpoints();
 
 
 app.UseHttpsRedirection();
+
+app.Run();
 
 

@@ -31,7 +31,8 @@ var catalog = builder
 
 var basket = builder
     .AddProject<Projects.Basket>("basket")  // Add a project named 'basket'
-    .WithReference(cache)                   // Reference the Redis cache in the project
+    .WithReference(cache)  // Reference the Redis cache in the project
+    .WithReference(catalog)
     .WaitFor(cache);                        // Ensure the project waits for the cache to be ready before starting
 
 

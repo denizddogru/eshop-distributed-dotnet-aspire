@@ -12,6 +12,14 @@ var postgres = builder
 // Add a database named 'catalogdb' to the PostgreSQL service
 var catalogDb = postgres.AddDatabase("catalogdb");  // Create a new database within the PostgreSQL service
 
+var cache = builder
+    .AddRedis("cache")  // Add Redis as a backing service
+    .WithRedisInsight()  // Include RedisInsight for monitoring Redis
+    .WithDataVolume()   // Attach a data volume to persist Redis data
+    .WithLifetime(ContainerLifetime.Persistent);  // Set the container lifetime as persistent
+
+
+
 // Projects
 
 // Catalog projesini environment variableslarda ConnectionString olarak inject ettiğimiz kısım. ( with reference )
@@ -21,6 +29,10 @@ var catalog = builder
     .WithReference(catalogDb)                 // Reference the 'catalogdb' database in the project
     .WaitFor(catalogDb);                      // Ensure the project waits for the database to be ready before starting
 
-builder.AddProject<Projects.Basket>("basket"); // Automatically added after creating the basket microservice
+var basket = builder
+    .AddProject<Projects.Basket>("basket")  // Add a project named 'basket'
+    .WithReference(cache)                   // Reference the Redis cache in the project
+    .WaitFor(cache);                        // Ensure the project waits for the cache to be ready before starting
+
 
 builder.Build().Run(); 

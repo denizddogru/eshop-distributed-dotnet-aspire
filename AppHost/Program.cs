@@ -1,4 +1,4 @@
-﻿var builder = DistributedApplication.CreateBuilder(args);
+var builder = DistributedApplication.CreateBuilder(args);
 
 // Backing Services
 
@@ -20,5 +20,7 @@ var catalog = builder
     .AddProject<Projects.Catalog>("catalog")  // Add a project named 'catalog'
     .WithReference(catalogDb)                 // Reference the 'catalogdb' database in the project
     .WaitFor(catalogDb);                      // Ensure the project waits for the database to be ready before starting
+
+builder.AddProject<Projects.Basket>("basket"); // Automatically added after creating the basket microservice
 
 builder.Build().Run(); 

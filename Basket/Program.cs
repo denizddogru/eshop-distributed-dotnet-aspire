@@ -10,8 +10,8 @@ builder.Services.AddScoped<BasketService>();
 
 builder.Services.AddHttpClient<CatalogApiClient>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiUrls:Catalog"]);
-    //client.BaseAddress = new("https+http://catalog");
+    //client.BaseAddress = new Uri(builder.Configuration["ApiUrls:Catalog"]);
+    client.BaseAddress = new("https+http://catalog");
 });
 
 var app = builder.Build();

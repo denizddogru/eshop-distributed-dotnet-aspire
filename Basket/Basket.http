@@ -38,24 +38,17 @@ Content-Type: application/json
     "Items": [
         {
         "Quantity": 3,
-        "Color": "Red",
+        "Color": "REDDD",
         "Price": 0,
         "ProductId": 1,
         "ProductName": "Solar Powered Flashlight"
         },
         {
         "Quantity": 4,
-        "Color": "Blue",
+        "Color": "BRS",
         "Price": 0,
         "ProductId": 2,
         "ProductName": "Hiking Poles"
-        },
-        {
-        "Quantity": 5,
-        "Color": "Blue",
-        "Price": 0,
-        "ProductId": 9,
-        "ProductName": "Camping Tent"
         }
     ]
 }
@@ -64,7 +57,6 @@ Content-Type: application/json
 
 DELETE {{Basket_HostAddress}}/swn
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
 
 ###
 

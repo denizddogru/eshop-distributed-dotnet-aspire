@@ -13,6 +13,8 @@ This project provides common .NET Aspire services such as service discovery, res
 - **Dependency Injection**: Services are registered and injected using .NET's built-in dependency injection.
 - **HTTPS Redirection**: Ensures all HTTP requests are redirected to HTTPS.
 - **Automatic Migrations**: Applies database migrations automatically on startup.
+- **Redis Cache**: Uses Redis for distributed caching in the Basket microservice.
+- **Catalog Integration**: Fetches product details from the Catalog microservice.
 
 ## Getting Started
 
@@ -28,7 +30,7 @@ This project provides common .NET Aspire services such as service discovery, res
 - PostgreSQL ( Using migrations and EF Core )
 - RabbitMQ
 - Docker Desktop ( You need Docker Desktop started before running the application )
-
+- Redis
 
 ### Running the Application
 
@@ -40,6 +42,7 @@ This project provides common .NET Aspire services such as service discovery, res
 - `Aspire.AppHost.Sdk` (v9.1.0)
 - `Aspire.Hosting.AppHost` (v9.1.0)
 - `Aspire.Hosting.PostgreSQL` (v9.1.0)
+- `Aspire.StackExchange.Redis.DistributedCaching` (v9.1.0)
 
 ### Step By Step Development Plan
 
@@ -48,6 +51,19 @@ This project provides common .NET Aspire services such as service discovery, res
 - **Authentication & Security**: Secure Basket Endpoints w/ Keycloak using OpenID Connect Jwt Tokens
 - **Frontend Development**: Blazor WebApp Products page development
 
+## Basket Microservice
 
-   
-   
+### API Endpoints
+
+#### Get Basket
+
+- **URL**: `GET /basket/{userName}`
+- **Description**: Retrieves the basket for the specified user.
+- **Response**: `200 OK` with the basket data, `404 Not Found` if the basket does not exist.
+
+#### Update Basket
+
+- **URL**: `POST /basket`
+- **Description**: Updates the basket with the provided data. Fetches product details from the Catalog service before updating the cache.
+- **Request Body**:
+    

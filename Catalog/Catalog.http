@@ -22,14 +22,14 @@ Content-Type: application/json
 
 ###
 
-PUT {{Catalog_HostAddress}}/10
+PUT {{Catalog_HostAddress}}/1
 Content-Type: application/json
 {
   "id": 10,
   "name": "UPDATED Sun Flashlist",
   "description": "Test Product Description",
-  "price": 55.0,
-  "imageUrl": "Product10.png"
+  "price": 3311.0,
+  "imageUrl": "313131.png"
 }
 
 ###

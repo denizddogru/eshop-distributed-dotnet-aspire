@@ -24,14 +24,16 @@ public static class MassTransitExtensions
             config.AddSagas(assemblies);
             config.AddActivities(assemblies);
 
-            config.UsingRabbitMq((context, cfg) =>
+            config.UsingRabbitMq((context, configurator) =>
             {
-                var config = context.GetRequiredService<IConfiguration>();
-                var connectionString = config.GetConnectionString("rabbitmq");
+                var configuration = context.GetRequiredService<IConfiguration>();
 
-                cfg.Host(connectionString);
-                cfg.ConfigureEndpoints(context);
+                // Get the connection string from configuration
+                var connectionString = configuration.GetConnectionString("rabbitmq")
+                    ?? "amqp://guest:fcz5xyypP1G3gjsTpS8BmF@localhost:5672";
 
+                configurator.Host(new Uri(connectionString));
+                configurator.ConfigureEndpoints(context);
             });
         });
 

@@ -1,6 +1,4 @@
-﻿using Basket.ApiClients;
-using ServiceDefaults;
-using System.Reflection;
+﻿using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +22,17 @@ builder.Services.AddHttpClient<CatalogApiClient>(client =>
 
 builder.Services.AddMassTransitWithAssemblies(Assembly.GetExecutingAssembly());
 
+builder.Services.AddAuthentication() // Sets up .NET auth pipeline
+    .AddKeycloakJwtBearer(
+    serviceName: "keycloak",
+    realm: "eshop",
+    configureOptions: options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.Audience = "account";
+    });
+builder.Services.AddAuthorization(); 
+
 var app = builder.Build();
 
 
@@ -31,6 +40,9 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 app.MapBasketEndpoints();
 
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.UseHttpsRedirection();
 

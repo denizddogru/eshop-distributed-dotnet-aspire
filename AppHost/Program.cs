@@ -25,6 +25,11 @@ var rabbitmq = builder
     .WithDataVolume()
     .WithLifetime(ContainerLifetime.Persistent);
 
+var keycloak = builder
+    .AddKeycloak("keycloak", 8080)  // Add Keycloak as a backing service
+    .WithDataVolume()         // Attach a data volume to persist Keycloak data
+    .WithLifetime(ContainerLifetime.Persistent);
+
 
 // Projects
 
@@ -42,8 +47,10 @@ var basket = builder
     .WithReference(cache)                   // Reference the Redis cache in the project
     .WithReference(catalog)
     .WithReference(rabbitmq)
+    .WithReference(keycloak)
     .WaitFor(cache)
-    .WaitFor(rabbitmq);                        // Ensure the project waits for the cache to be ready before starting
+    .WaitFor(rabbitmq)
+    .WaitFor(keycloak);                        // Ensure the project waits for the cache to be ready before starting
 
 
 builder.Build().Run();

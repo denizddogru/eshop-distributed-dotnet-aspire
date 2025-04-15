@@ -53,4 +53,12 @@ var basket = builder
     .WaitFor(keycloak);                        // Ensure the project waits for the cache to be ready before starting
 
 
+var webapp = builder
+    .AddProject<Projects.WebApp>("webapp")  // Add a project named 'webapp'
+    .WithExternalHttpEndpoints()  // Expose external HTTP endpoints for the project
+    .WithReference(catalog)       // Reference the 'catalog' project in the webapp
+    .WithReference(basket)     // Reference the 'basket' project in the webapp
+    .WaitFor(catalog)      // Ensure the webapp waits for the catalog project to be ready before starting
+    .WaitFor(basket);      // Ensure the webapp waits for the basket project to be ready before starting
+
 builder.Build().Run();

@@ -1,7 +1,7 @@
+using WebApp.ApiClients;
 using WebApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 // Add services to the container.
 
@@ -10,12 +10,16 @@ builder.AddServiceDefaults();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-var app = builder.Build();
+//// Register CatalogApiClient with HttpClient
+//builder.Services.AddHttpClient<CatalogApiClient>(client =>
+//{
+//    client.BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"] ?? "https://localhost:5001");
+//});
 
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.MapDefaultEndpoints();
-
 
 if (!app.Environment.IsDevelopment())
 {
@@ -25,7 +29,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 
 app.UseAntiforgery();
 
